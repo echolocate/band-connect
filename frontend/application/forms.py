@@ -3,5 +3,5 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
 class BandForm(FlaskForm):
-    band_name = StringField("Task Description", validators=[DataRequired()])
+    name = StringField("Band Name", validators=[DataRequired()])
     submit = SubmitField("Add Band")
