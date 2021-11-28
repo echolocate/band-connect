@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <h2>Available Bands</h2>
+    {% for band in all_bands %}
+    {# {% if band["signed"] == False %} #}
+        <p>
+            Band ID: {{ band["id"] }}<br>
+            Band Name: {{ band["name"] }}<br>
+            <!--<a href="{{ url_for('update_band', id=band.id) }}">Edit</a> -->
+            <a href="{{ url_for('delete_band', id=band.id) }}">Sign</a>
+            <!-- <a href="{{ url_for('contact_band', id=task.id) }}">Contact</a> -->
+        </p>    
+    {# {% endif %} #}
+    {% endfor %}
+
+{% endblock body %}   
