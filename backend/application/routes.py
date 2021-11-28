@@ -5,10 +5,10 @@ from flask import render_template, request, redirect, url_for, Response, jsonify
 @app.route('/create/band', methods=['POST'])
 def create_band():
     package = request.json
-    new_band = Band(band_name=package["band_name"])
+    new_band = Bands(name=package["name"])
     db.session.add(new_band)
     db.session.commit()
-    return Response(f"Added band: {new_band.description}", mimetype='text/plain')
+    return Response(f"Added band: {new_band.name}", mimetype='text/plain')
 
 @app.route('/read/allBands', methods=['GET'])
 def read_bands():
@@ -23,3 +23,10 @@ def read_bands():
             }
         )
     return jsonify(bands_dict)
+
+@app.route('/delete/band/<int:id>', methods=['DELETE'])
+def delete_band(id):
+    band = Bands.query.get(id)
+    db.session.delete(band)
+    db.session.commit()
+    return Response(f"Band with ID: {id} signed and removed", mimetype='text/plain')
