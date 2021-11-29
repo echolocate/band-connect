@@ -1,5 +1,5 @@
 from application import app, db
-from application.models import Bands
+from application.models import Bands, Agent
 from flask import render_template, request, redirect, url_for, Response, jsonify
 
 @app.route('/create/band', methods=['POST'])

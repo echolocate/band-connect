@@ -3,7 +3,7 @@ from application import db
 class Agent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     agent_name = db.Column(db.String(30), nullable=False)
-    phone = db.Column(db.Integer(20), nullable=False)
+    # phone = db.Column(db.Integer(20), nullable=False)
     bands = db.relationship('Band', backref='agentbr')
     
 class Bands(db.Model):
