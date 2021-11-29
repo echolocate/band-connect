@@ -25,12 +25,26 @@ def read_bands():
     for band in all_bands:
         tasks_dict["bands"].append(
             {
-                "id": task.id,
-                "bandname": band.name,
+                "id": bands.id,
+                "bandname": bands.name,
                 #"signed": band.signed
             }
         )
     return jsonify(bands_dict)
+
+@app.route('/read/allAgents', methods=['GET'])
+def read_agents():
+    all_agents = Agent.query.all()
+    agent_dict = {"agent": []}
+    for agent in all_agents:
+        tasks_dict["agent"].append(
+            {
+                "id": agent.id,
+                "agentname": agent_name.name,
+                #"signed": band.signed
+            }
+        )
+    return jsonify(agent_dict)
 
 @app.route('/delete/band/<int:id>', methods=['DELETE'])
 def delete_band(id):
