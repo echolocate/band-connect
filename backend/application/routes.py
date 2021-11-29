@@ -46,9 +46,9 @@ def read_agents():
         )
     return jsonify(agent_dict)
 
-@app.route('/delete/band/<int:id>', methods=['DELETE'])
-def delete_band(id):
-    band = Bands.query.get(id)
-    db.session.delete(band)
-    db.session.commit()
-    return Response(f"Band with ID: {id} signed and removed", mimetype='text/plain')
+# @app.route('/delete/band/<int:id>', methods=['DELETE'])
+# def delete_band(id):
+#     band = Bands.query.get(id)
+#     db.session.delete(band)
+#     db.session.commit()
+#     return Response(f"Band with ID: {id} signed and removed", mimetype='text/plain')
