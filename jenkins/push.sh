@@ -2,4 +2,4 @@
 
 echo "Push stage"
 
-docker-compose pushgit 
+docker-compose push
