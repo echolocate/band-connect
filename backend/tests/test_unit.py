@@ -3,8 +3,6 @@ from flask_testing import TestCase
 from application import app, db
 from application.models import Tasks
 
-<<<<<<< HEAD
-=======
 test_band={
     "id": 1,
     "name": "The Rutles",
@@ -18,7 +16,6 @@ test_agent={
     "phone": 987654321
     }
 
->>>>>>> feature/3-extend-table-objects
 class TestBase(TestCase):
 
     def create_app(self):
