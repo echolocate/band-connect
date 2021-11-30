@@ -40,7 +40,6 @@ class TestBase(TestCase):
 
 class TestRead(TestBase):
 
-<<<<<<< HEAD
     def test_read_home_tasks(self):
         response = self.client.get(url_for('home'))
         self.assertIn(b"Run unit tests", response.data)
@@ -48,7 +47,6 @@ class TestRead(TestBase):
     def test_read_tasks_dictionary(self):
         response = self.client.get(url_for('read_tasks'))
         self.assertIn(b"Run unit tests", response.data)
-=======
     def test_read_all_bands(self):
         response = self.client.get(url_for('read_bands'))
         all_bands = { "bands": [test_band] }
@@ -57,7 +55,6 @@ class TestRead(TestBase):
     def test_read_band(self):
         response = self.client.get(url_for('read_band', id=1))
         self.assertEquals(test_band, response.json)
->>>>>>> feature/3-extend-table-objects
 
 class TestCreate(TestBase):
 
