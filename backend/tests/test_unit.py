@@ -40,13 +40,15 @@ class TestBase(TestCase):
 
 class TestRead(TestBase):
 
-    def test_read_home_tasks(self):
-        response = self.client.get(url_for('home'))
-        self.assertIn(b"Run unit tests", response.data)
+    def test_read_all_agents(self):
+        response = self.client.get(url_for('read_agents'))
+        all_agents = { "agents": [test_agent] }
+        self.assertEquals(all_agents, response.json)
     
-    def test_read_tasks_dictionary(self):
-        response = self.client.get(url_for('read_tasks'))
-        self.assertIn(b"Run unit tests", response.data)
+    def test_read_agent(self):
+        response = self.client.get(url_for('read_agent'))
+        self.assertEquals(test_agent, response.json)
+
     def test_read_all_bands(self):
         response = self.client.get(url_for('read_bands'))
         all_bands = { "bands": [test_band] }
