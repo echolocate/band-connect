@@ -1,7 +1,7 @@
 from flask import url_for
 from flask_testing import TestCase
 from application import app, db
-from application.models import Tasks
+from application.models import Agent, Bands
 
 test_band={
     "id": 1,

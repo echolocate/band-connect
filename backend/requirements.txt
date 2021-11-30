@@ -7,8 +7,4 @@ Jinja2==3.0.3
 MarkupSafe==2.0.1
 PyMySQL==1.0.2
 SQLAlchemy==1.4.27
-<<<<<<< HEAD
 Werkzeug==2.0.2
-=======
-Werkzeug==2.0.2
->>>>>>> feature/3-extend-table-objects
