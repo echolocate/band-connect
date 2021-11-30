@@ -2,6 +2,7 @@
 
 echo "Test stage"
 
+# create virtual environment
 python3 -m venv venv
 source venv/bin/activate
 
@@ -14,7 +15,7 @@ mkdir test_reports
 python3 -m pytest frontend \
     --cov=frontend/application \
     --cov=report term-missing \
-    --cov=report xml:test_reports/frontend_coverage.xml
+    --cov=report xml:test_reports/frontend_coverage.xml \
     --junitxml=test_reports/frontend_junit_report.xml
 
 python3 -m pytest backend \
@@ -22,9 +23,6 @@ python3 -m pytest backend \
     --cov=report term-missing \
     --cov=report xml:test_reports/backend_coverage.xml \
     --junitxml=test_reports/backend_junit_report.xml
-
-python3 -m pytest frontend
-python3 -m pytest backend
 
 deactivate
 

@@ -1,7 +1,7 @@
 from flask import url_for
 from flask_testing import TestCase
 from application import app, db
-from application.models import Tasks
+from application.models import Agent, Bands
 
 test_band={
     "id": 1,
@@ -40,6 +40,15 @@ class TestBase(TestCase):
 
 class TestRead(TestBase):
 
+    def test_read_all_agents(self):
+        response = self.client.get(url_for('read_agents'))
+        all_agents = { "agents": [test_agent] }
+        self.assertEquals(all_agents, response.json)
+    
+    def test_read_agent(self):
+        response = self.client.get(url_for('read_agent'))
+        self.assertEquals(test_agent, response.json)
+
     def test_read_all_bands(self):
         response = self.client.get(url_for('read_bands'))
         all_bands = { "bands": [test_band] }
@@ -51,13 +60,14 @@ class TestRead(TestBase):
 
 class TestCreate(TestBase):
 
-    def test_create_task(self):
+    def test_create_agent(self):
         response = self.client.post(
-            url_for('create_task'),
-            data={"description": "Testing create functionality"},
+            url_for('create_agent'),
+            json={"agent_name": "Dick Jaws", "phone":"0123456789"},
             follow_redirects=True
         )
-        self.assertIn(b"Testing create functionality", response.data)
+        self.assertEquals(b"Added agent: Dick Jaws", response.data)
+        self.assertEquals(Agent.query.get(2).agent_name, "Dick Jaws")
     
 class TestUpdate(TestBase):
 
