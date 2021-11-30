@@ -10,7 +10,7 @@ class Bands(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), nullable=False)
     phone = db.Column(db.Integer(15), nullable = False)
-    # signed = db.Column(db.Boolean, nullable=False, default=False)
+    signed = db.Column(db.Boolean, nullable=False, default=False)
     agent_id = db.Column(db.Integer, db.ForeignKey('agent.id'), nullable=False)
 
 
