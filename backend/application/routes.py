@@ -18,6 +18,20 @@ def create_band():
     db.session.commit()
     return Response(f"Added band: {new_band.name}", mimetype='text/plain')
 
+@app.route('/read/allAgents', methods=['GET'])
+def read_agents():
+    all_agents = Agent.query.all()
+    agents_dict = {"agents": []}
+    for agent in all_agents:
+        agents_dict["agents"].append(
+            {
+                "id": agent.id,
+                "name": agent.agent_name,
+                "phone": agent.phone
+            }
+        )
+    return jsonify(bands_dict)
+
 @app.route('/read/allBands', methods=['GET'])
 def read_bands():
     all_bands = Bands.query.all()
@@ -27,6 +41,7 @@ def read_bands():
             {
                 "id": bands.id,
                 "name": bands.name,
+                "phone": bands.phone,
                 "signed": band.signed
             }
         )
@@ -34,28 +49,27 @@ def read_bands():
 
 @app.route('/read/band/<int:id>', methods=['GET'])
 def read_band(id):
-    band = Tasks.query.get(id)
+    band = Bands.query.get(id)
     bands_dict = {
-                    "id": bands.id,
-                    "name": bands.name,
-                    "phone": bands.phone,
-                    "signed": bands.signed
-                }
+        "id": bands.id,
+        "name": bands.name,
+        "phone": bands.phone,
+        "signed": bands.signed
+        }
     return jsonify(bands_dict)
 
-@app.route('/read/allAgents', methods=['GET'])
-def read_agents():
-    all_agents = Agent.query.all()
-    agent_dict = {"agent": []}
-    for agent in all_agents:
-        tasks_dict["agent"].append(
-            {
-                "id": agent.id,
-                "agentname": agent_name.name,
-                #"signed": band.signed
-            }
-        )
-    return jsonify(agent_dict)
+@app.route('/read/agent/<int:id>', methods=['GET'])
+def read_agent(id):
+    agent = Agent.query.get(id)
+    agents_dict = {
+        "id": agent.id,
+        "name": agent.agent_name,
+        "phone": agent.phone
+        }
+    return jsonify(agents_dict)
+
+
+
 
 # @app.route('/delete/band/<int:id>', methods=['DELETE'])
 # def delete_band(id):
