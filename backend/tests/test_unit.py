@@ -71,28 +71,27 @@ class TestCreate(TestBase):
     
 class TestUpdate(TestBase):
 
-    def test_update_task(self):
-        response = self.client.post(
-            url_for('update_task', id=1),
-            data={"description": "Testing update functionality"},
-            follow_redirects=True
+    def test_update_agent(self):
+        response = self.client.put(
+            url_for('update_agent', id=1),
+            json={"name": "Dick Jaws"}
         )
-        self.assertIn(b"Testing update functionality", response.data)
-    
-    def test_complete_task(self):
-        response = self.client.get(url_for('complete_task', id=1), follow_redirects=True)
-        self.assertEqual(Tasks.query.get(1).completed, True)
-    
-    def test_incomplete_task(self):
-        response = self.client.get(url_for('incomplete_task', id=1), follow_redirects=True)
-        self.assertEqual(Tasks.query.get(1).completed, False)
-        
+        self.assertEquals(b"Updated agent (ID: 1) with name: Dick Jaws", response.data)
+        self.assertEquals(Agent.query.get(1).name, "Dick Jaws")
 
+    def test_update_band(self):
+        response = self.client.put(
+            url_for('update_band', id=1),
+            json={"name": "Conner4Real","phone":"444444444444"}
+        )
+        self.assertEquals(b"Updated bands (ID: 1) with name: Conner4Real, phone number 444444444444", response.data)
+        self.assertEquals(Bands.query.get(1).name, "Conner4Real")
+        self.assertEquals(Bands.query.get(1).phone, "444444444444")
+    
 class TestDelete(TestBase):
 
-    def test_delete_task(self):
-        response = self.client.get(
-            url_for('delete_task', id=1),
-            follow_redirects=True
-        )
-        self.assertNotIn(b"Run unit tests", response.data)
+    def test_delete_band(self):
+        response = self.client.delete(url_for('delete_band', id=1)),
+        self.assertEquals(b"Band with ID: 1 now signed", response.data)
+        self.assertIsNone(Bands.query.get(1))
+
