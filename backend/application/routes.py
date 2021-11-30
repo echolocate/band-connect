@@ -68,12 +68,28 @@ def read_agent(id):
         }
     return jsonify(agents_dict)
 
+@app.route('/update/agent/<int:id>', methods=['PUT'])
+def update_agent(id):
+    package = request.json
+    agent = Agent.query.get(id)
+    agent.name = package["name"]
+    agent.phone = package["phone"]
+    db.session.commit()
+    return Response(f"Updated agent (ID: {id}) with name: {agent.name}, phone number {agent.phone}", mimetype='text/plain')
 
+@app.route('/update/band/<int:id>', methods=['PUT'])
+def update_band(id):
+    package = request.json
+    bands = Bands.query.get(id)
+    bands.name = package["name"]
+    bands.phone = package["phone"]
+    db.session.commit()
+    return Response(f"Updated bands (ID: {id}) with name: {bands.name}, phone number {bands.phone}", mimetype='text/plain')
 
-
-# @app.route('/delete/band/<int:id>', methods=['DELETE'])
-# def delete_band(id):
-#     band = Bands.query.get(id)
-#     db.session.delete(band)
-#     db.session.commit()
-#     return Response(f"Band with ID: {id} signed and removed", mimetype='text/plain')
+@app.route('/delete/band/<int:id>', methods=['DELETE'])
+def delete_band(id):
+    band = Bands.query.get(id)
+    db.session.delete(band)
+    db.session.commit()
+    return Response(f"Band with ID: {id} now signed", mimetype='text/plain')
+    

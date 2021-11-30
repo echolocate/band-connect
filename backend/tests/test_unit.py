@@ -60,13 +60,14 @@ class TestRead(TestBase):
 
 class TestCreate(TestBase):
 
-    def test_create_task(self):
+    def test_create_agent(self):
         response = self.client.post(
-            url_for('create_task'),
-            data={"description": "Testing create functionality"},
+            url_for('create_agent'),
+            json={"agent_name": "Dick Jaws", "phone":"0123456789"},
             follow_redirects=True
         )
-        self.assertIn(b"Testing create functionality", response.data)
+        self.assertEquals(b"Added agent: Dick Jaws", response.data)
+        self.assertEquals(Agent.query.get(2).agent_name, "Dick Jaws")
     
 class TestUpdate(TestBase):
 
