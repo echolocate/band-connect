@@ -1,4 +1,4 @@
-# Artist Link Web App
+# Band Connect Web App
 
 ## Brief
 As a final individual project on the QA DevOps Boot Camp we were asked to write a web application to achieve the following objectives:

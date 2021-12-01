@@ -2,14 +2,14 @@ from application import db
 
 class Agent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    agent_name = db.Column(db.String(30), nullable=False)
-    phone = db.Column(db.Integer(20), nullable=False)
-    bands = db.relationship('Band', backref='agentbr')
+    name = db.Column(db.String(50), nullable=False)
+    phone = db.Column(db.String(20), nullable=False)
+    bands = db.relationship('Band', backref='agent')
     
-class Bands(db.Model):
+class Band(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), nullable=False)
-    phone = db.Column(db.Integer(15), nullable = False)
+    name = db.Column(db.String(50), nullable=False)
+    phone = db.Column(db.String(20), nullable = False)
     signed = db.Column(db.Boolean, nullable=False, default=False)
     agent_id = db.Column(db.Integer, db.ForeignKey('agent.id'), nullable=False)
 
