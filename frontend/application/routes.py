@@ -9,7 +9,7 @@ backend_host = "bc-app_backend:5000"
 @app.route('/home')
 def home():
     all_bands = requests.get(f"http://{backend_host}/read/allBands").json()
-    app.logger.info(f"Bands: {all_bands}")
+    app.logger.info(f"Band: {all_bands}")
     return render_template('index.html', title="Home")
 
 @app.route('/create/band', methods=['GET','POST'])

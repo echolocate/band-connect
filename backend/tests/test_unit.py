@@ -1,7 +1,7 @@
 from flask import url_for
 from flask_testing import TestCase
 from application import app, db
-from application.models import Agent, Bands
+from application.models import Agent, Band
 
 test_band={
     "id": 1,
@@ -29,8 +29,8 @@ class TestBase(TestCase):
     def setUp(self):
         # Will be called before every test
         db.create_all()
-        db.session.add(Bands(name="La Garcon De La Plage"))
-        db.session.add(Bands(phone="34567654321"))
+        db.session.add(Band(name="La Garcon De La Plage"))
+        db.session.add(Band(phone="34567654321"))
         db.session.add(Agent(name="Ron DeKlein"))
         db.session.add(Agent(phone="9999999999"))
         db.session.commit()
@@ -86,14 +86,14 @@ class TestUpdate(TestBase):
             url_for('update_band', id=1),
             json={"name": "Conner4Real","phone":"444444444444"}
         )
-        self.assertEquals(b"Updated bands (ID: 1) with name: Conner4Real, phone number 444444444444", response.data)
-        self.assertEquals(Bands.query.get(1).name, "Conner4Real")
-        self.assertEquals(Bands.query.get(1).phone, "444444444444")
+        self.assertEquals(b"Updated Band (ID: 1) with name: Conner4Real, phone number 444444444444", response.data)
+        self.assertEquals(Band.query.get(1).name, "Conner4Real")
+        self.assertEquals(Band.query.get(1).phone, "444444444444")
     
 class TestDelete(TestBase):
 
     def test_delete_band(self):
         response = self.client.delete(url_for('delete_band', id=1)),
         self.assertEquals(b"Band with ID: 1 now signed", response.data)
-        self.assertIsNone(Bands.query.get(1))
+        self.assertIsNone(Band.query.get(1))
 
