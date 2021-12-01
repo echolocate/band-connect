@@ -6,14 +6,14 @@ from application.models import Agent, Bands
 test_band={
     "id": 1,
     "name": "The Rutles",
-    "phone": 123456789,
+    "phone": "123456789",
     "signed": False
     }
         
 test_agent={
     "id": 1,
     "agent_name": "Leggy Mountbatten",
-    "phone": 987654321
+    "phone": "987654321"
     }
 
 class TestBase(TestCase):
