@@ -32,7 +32,7 @@ class TestBase(TestCase):
         db.session.add(Bands(name="La Garcon De La Plage"))
         db.session.add(Bands(phone="34567654321"))
         db.session.add(Agent(name="Ron DeKlein"))
-        db.session.add(Bands(phone="9999999999"))
+        db.session.add(Agent(phone="9999999999"))
         db.session.commit()
 
     def tearDown(self):
