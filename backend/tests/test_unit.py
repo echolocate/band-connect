@@ -29,7 +29,10 @@ class TestBase(TestCase):
     def setUp(self):
         # Will be called before every test
         db.create_all()
-        db.session.add(Tasks(description="Run unit tests"))
+        db.session.add(Bands(name="La Garcon De La Plage"))
+        db.session.add(Bands(phone="34567654321"))
+        db.session.add(Agent(name="Ron DeKlein"))
+        db.session.add(Bands(phone="9999999999"))
         db.session.commit()
 
     def tearDown(self):
