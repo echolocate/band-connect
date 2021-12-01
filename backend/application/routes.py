@@ -5,10 +5,10 @@ from flask import render_template, request, redirect, url_for, Response, jsonify
 @app.route('/create/agent', methods=['POST'])
 def create_agent():
     package = request.json
-    new_agent = Agent(agent_name=package["agent_name"], phone=package["phone"])
+    new_agent = Agent(name=package["name"], phone=package["phone"])
     db.session.add(new_agent)
     db.session.commit()
-    return Response(f"Added agent: {new_agent.name}", mimetype='text/plain')
+    return f"Added agent: {agent.name}"
 
 @app.route('/create/band/<int:agent_id>', methods=['POST'])
 def create_band(agent_id):
@@ -21,7 +21,7 @@ def create_band(agent_id):
     )
     db.session.add(new_band)
     db.session.commit()
-    return Response(f"Added band: {new_band.name}", mimetype='text/plain')
+    return f"Added band: {new_band.name}"
 
 @app.route('/read/allAgents', methods=['GET'])
 def read_agents():
@@ -69,8 +69,8 @@ def read_band(id):
     bands_dict = {
         "id": Band.id,
         "name": Band.name,
-        "phone": bands.phone,
-        "signed": bands.signed
+        "phone": Band.phone,
+        "signed": Band.signed
         }
     return jsonify(bands_dict)
 
@@ -91,7 +91,7 @@ def update_agent(id):
     agent.name = package["name"]
     agent.phone = package["phone"]
     db.session.commit()
-    return Response(f"Updated agent (ID: {id}) with name: {agent.name}, phone number {agent.phone}", mimetype='text/plain')
+    return f"Updated agent (ID: {id}) with name: {agent.name}, phone number {agent.phone}"
 
 @app.route('/update/band/<int:id>', methods=['PUT'])
 def update_band(id):
@@ -100,7 +100,7 @@ def update_band(id):
     bands.name = package["name"]
     bands.phone = package["phone"]
     db.session.commit()
-    return Response(f"Updated bands (ID: {id}) with name: {bands.name}, phone number {bands.phone}", mimetype='text/plain')
+    return f"Updated bands (ID: {id}) with name: {bands.name}, phone number {bands.phone}"
 
 @app.route('/delete/band/<int:id>', methods=['DELETE'])
 def delete_band(id):

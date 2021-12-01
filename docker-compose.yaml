@@ -5,7 +5,7 @@ services:
     image: ${DOCKER_HUB_CREDS_USR}/bc-app-frontend:latest
     container_name: bc-app-frontend
     ports:
-    - target: 80
+    - target: 5000
       published: 80
   backend:
     build: ./backend
@@ -15,7 +15,7 @@ services:
       DATABASE_URI:
       CREATE_SCHEMA:
     ports:
-    - target: 80
+    - target: 5000
       published: 5000
 
       
