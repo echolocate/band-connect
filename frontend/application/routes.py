@@ -2,8 +2,9 @@ from application import app
 from application.forms import BandForm, AgentForm
 from flask import render_template, request, redirect, url_for, jsonify
 import requests
+from os import getenv
 
-backend = "bc-app_backend:5000"
+backend = getenv("BACKEND_HOSTNAME")
 
 @app.route('/', methods=['GET'])
 def home():
