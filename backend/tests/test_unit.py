@@ -21,7 +21,6 @@ class TestBase(TestCase):
     def create_app(self):
         # Defines the flask object's configuration for the unit tests
         app.config.update(
-            SQLALCHEMY_DATABASE_URI='sqlite:///',
             DEBUG=True,
             WTF_CSRF_ENABLED=False
         )
