@@ -1,17 +1,25 @@
 {% extends "layout.html" %}
 {% block body %}
+    {% for agent in agents %}
+    <table>
+        <h2>{{ agent["name"] }}</h2>
+        <tr>
+            <td><b>Phone</b></td>
+            <td>{{ agent["phone"] }}</td>
+        </tr>        
+    </table>
 
-    <h2>Available Bands</h2>
-    {% for band in all_bands %}
-    {# {% if band["signed"] == False %} #}
-        <p>
-            Band ID: {{ band["id"] }}<br>
-            Band Name: {{ band["name"] }}<br>
-            <!--<a href="{{ url_for('update_band', id=band.id) }}">Edit</a> -->
-            <a href="{{ url_for('delete_band', id=band.id) }}">Sign</a>
-            <!-- <a href="{{ url_for('contact_band', id=task.id) }}">Contact</a> -->
-        </p>    
-    {# {% endif %} #}
-    {% endfor %}
+    <h2>Bands signed with {{ agent["name"] }}</h2>
+    <table>
+        <tr>
+            <th>Name</th>            
+        </tr>
+        {% for band in agent["bands"] %}
+        <tr>
+            <td>{{ band["name"] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 
+    {% endfor %} 
 {% endblock body %}   

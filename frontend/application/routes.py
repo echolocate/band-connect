@@ -3,14 +3,30 @@ from application.forms import BandForm
 from flask import render_template, request, redirect, url_for, jsonify
 import requests
 
-backend_host = "bc-app_backend:5000"
+backend = "bc-app_backend:5000"
 
-@app.route('/')
-@app.route('/home')
+@app.route('/', methods=['GET'])
 def home():
-    all_bands = requests.get(f"http://{backend_host}/read/allBands").json()
-    app.logger.info(f"Band: {all_bands}")
-    return render_template('index.html', title="Home")
+    agents = requests.get(f"http://{backend}/read/allAgents").json()["agents"]
+    return render_template('index.html', title="Home", agents=agents)
+
+@app.route('/create/agent', methods=['GET','POST'])
+def create_agent():
+    form = AgentForm()
+
+    if request.method == "POST":
+        response = requests.post(
+            f"http://{backend}/create/agent",
+            json={
+                "name": form.name.data, 
+                "phone": form.phone.data
+            }
+        )
+        app.logger.info(f"Response: {response.text}")
+        return redirect(url_for('home'))
+        
+    return render_template("create_agent.html", title="Add agent", form=form)
+    
 
 @app.route('/create/band', methods=['GET','POST'])
 def create_band():
