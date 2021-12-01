@@ -21,16 +21,16 @@ def create_band():
 @app.route('/read/allAgents', methods=['GET'])
 def read_agents():
     all_agents = Agent.query.all()
-    agents_dict = {"agents": []}
+    agents_dict = {"agent": []}
     for agent in all_agents:
-        agents_dict["agents"].append(
+        agents_dict["agent"].append(
             {
                 "id": agent.id,
-                "name": agent.agent_name,
+                "name": agent.name,
                 "phone": agent.phone
             }
         )
-    return jsonify(bands_dict)
+    return jsonify(agents_dict)
 
 @app.route('/read/allBands', methods=['GET'])
 def read_bands():
@@ -63,7 +63,7 @@ def read_agent(id):
     agent = Agent.query.get(id)
     agents_dict = {
         "id": agent.id,
-        "name": agent.agent_name,
+        "name": agent.name,
         "phone": agent.phone
         }
     return jsonify(agents_dict)
@@ -92,4 +92,3 @@ def delete_band(id):
     db.session.delete(band)
     db.session.commit()
     return Response(f"Band with ID: {id} now signed", mimetype='text/plain')
-    
