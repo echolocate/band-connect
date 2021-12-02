@@ -53,7 +53,7 @@ def read_agents():
 
 @app.route('/read/allBands', methods=['GET'])
 def read_bands():
-    all_bands = Bands.query.all()
+    all_bands = Band.query.all()
     bands_dict = {"bands": []}
     for band in all_bands:
         bands_dict["bands"].append(
