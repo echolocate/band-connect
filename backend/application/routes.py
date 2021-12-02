@@ -1,29 +1,27 @@
 from application import app, db
 from application.models import Band, Agent
-from flask import render_template, request, redirect, url_for, Response, jsonify
-from os import getenv
+from flask import request, jsonify
 
-print(f"CREATE_SCHEMA = {getenv('CREATE_SCHEMA')}")
-if getenv("CREATE_SCHEMA").lower() == "true":
-    print("Creating table schema")
-    db.drop_all()
-    db.create_all()
-
-@app.route('/create/agent', methods=['POST'])
+@app.route('/create/agent', methods=["POST"])
 def create_agent():
     package = request.json
-    new_agent = Agent(name=package["name"], phone=package["phone"])
+    new_agent = Agent(
+        name=package["name"], 
+        phone=package["phone"]
+    )
     db.session.add(new_agent)
     db.session.commit()
-    return f"Added agent: {agent.name}"
+    return f"Added agent: '{new_agent.name}' to database"
 
 @app.route('/create/band/<int:agent_id>', methods=['POST'])
 def create_band(agent_id):
     package = request.json
-    new_band = Band(name=package["name"], 
-    phone=package["phone"], 
-    signed=package["signed"], 
-    agent_id = agent_id)
+    new_band = Band(
+        name=package["name"],
+        phone=package["phone"],
+        signed=package["signed"],
+        agent_id = agent_id
+    )
     db.session.add(new_band)
     db.session.commit()
     return f"Added band: {new_band.name}"
