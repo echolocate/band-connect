@@ -24,7 +24,7 @@ def create_band(agent_id):
     )
     db.session.add(new_band)
     db.session.commit()
-    return f"Added band: {new_band.name}"
+    return f"Added band: '{new_band.name}'"
 
 @app.route('/read/allAgents', methods=['GET'])
 def read_agents():
