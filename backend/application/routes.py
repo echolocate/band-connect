@@ -3,11 +3,11 @@ from application.models import Band, Agent
 from flask import render_template, request, redirect, url_for, Response, jsonify
 from os import getenv
 
-print(f"CREATE_SCHEMA = {getenv('CREATE_SCHEMA')}")
-if getenv("CREATE_SCHEMA").lower() == "true":
-    print("Creating table schema")
-    db.drop_all()
-    db.create_all()
+# print(f"CREATE_SCHEMA = {getenv('CREATE_SCHEMA')}")
+# if getenv("CREATE_SCHEMA").lower() == "true":
+#     print("Creating table schema")
+#     db.drop_all()
+#     db.create_all()
 
 @app.route('/create/agent', methods=['POST'])
 def create_agent():
