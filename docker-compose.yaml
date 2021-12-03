@@ -6,7 +6,6 @@ services:
     image: markpdance/bc-app-frontend:latest
     container_name: bc-frontend
     deploy:
-      mode: replicated
       replicas: 2
     ports:
     - target: 5000
@@ -17,7 +16,6 @@ services:
     image: markpdance/bc-app-backend:latest
     container_name: bc-backend
     #deploy:
-      mode: replicated
       replicas: 2
     environment:
       DATABASE_URI:
