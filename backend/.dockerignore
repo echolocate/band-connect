@@ -4,4 +4,3 @@ __pycache__/
 .coverage
 .pytest_cache
 .gitignore
-.vscode
