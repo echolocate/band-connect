@@ -1,10 +1,27 @@
 {% extends "layout.html" %}
 {% block body %}
-<div class='form'>
-    <form method='POST' action=''>
-        {{ form.hidden_tag() }}
-        {{ form.name.label }} {{ form.name }}<br>
-        {{ form.submit }}<br>
-    </form>
-</div>
-{% endblock %}
+
+<form method="POST">
+    <table>
+        <tr>
+            <td>{{ form.name.label }}</td>
+            <td>{{ form.name }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.phone.label }}</td>
+            <td>{{ form.phone }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.genre.label }}</td>
+            <td>{{ form.genre }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.members.label }}</td>
+            <td>{{ form.members }}</td>
+        </tr>
+    </table>
+    {{ form.submit }}
+    {{ form.hidden_tag() }}
+</form>
+
+{% endblock body %}

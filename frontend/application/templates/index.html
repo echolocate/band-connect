@@ -1,25 +1,19 @@
 {% extends "layout.html" %}
 {% block body %}
-    {% for agent in agents %}
+    {% for band in bands %}
     <table>
-        <h2>{{ agent["name"] }}</h2>
+        <h2>{{ band["name"] }}</h2>
         <tr>
             <td><b>Phone</b></td>
-            <td>{{ agent["phone"] }}</td>
+            <td>{{ band["phone"] }}</td>
+        </tr>
+        <tr>
+            <td><b>Genre</b></td>
+            <td>{{ band["genre"] }}</td>
+        </tr>
+        <tr>
+            <td><b>Number of members</b></td>
+            <td>{{ band["members"] }}</td>
         </tr>        
-    </table>
-
-    <h2>Bands signed with {{ agent["name"] }}</h2>
-    <table>
-        <tr>
-            <th>Name</th>            
-        </tr>
-        {% for band in agent["bands"] %}
-        <tr>
-            <td>{{ band["name"] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-
     {% endfor %} 
 {% endblock body %}   
