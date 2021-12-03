@@ -5,8 +5,15 @@ from wtforms.validators import DataRequired
 class BandForm(FlaskForm):
     name = StringField("Band Name", validators=[DataRequired()])
     phone = StringField("Phone", validators=[DataRequired()])
-    genre = StringField("Genre", validators=[DataRequired()])
-    members = StringField("members", validators=[DataRequired()])
+    genre = SelectField('Audience', validators=[DataRequired()],
+        choices=[
+            ('Children', 'Children'),
+            ('Teenager', 'Teenager'),
+            ('Adult', 'Adult'),
+            ('Hardcore', 'Hardcore')
+        ]
+    )
+    members = StringField("Members", validators=[DataRequired()])
     submit = SubmitField("Add Band")
 
 class AgentForm(FlaskForm):
