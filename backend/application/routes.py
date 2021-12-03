@@ -44,6 +44,13 @@ def create_band():
     db.session.commit()
     return f"Added band: '{new_band.name}'"
 
+@app.route('/delete/band/<int:id>', methods=['DELETE'])
+def delete_band(id):
+    band = Band.query.get(id)
+    db.session.delete(band)
+    db.session.commit()
+    return f"Band with ID: {id} now deleted"
+
 # @app.route('/sign/band/<int:agent_id>/<int:band_id>', methods=['PUT'])
 # def sign_band(agent_id,band_id):
 #     band = Band.query.get(band_id)
