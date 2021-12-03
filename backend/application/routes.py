@@ -2,6 +2,23 @@ from application import app, db
 from application.models import Band, Agent
 from flask import request, jsonify
 
+@app.route('/read/allBands', methods=['GET'])
+def read_bands():
+    all_bands = Band.query.all()
+    bands_dict = {"bands": []}
+    for band in all_bands:
+        bands_dict["bands"].append(
+            {
+                "id": band.id,
+                "name": band.name,
+                "phone": band.phone,
+                "genre": band.genre,
+                "members": band.members,
+                "signed": band.signed
+            }
+        )
+    return jsonify(bands_dict)
+
 @app.route('/create/agent', methods=["POST"])
 def create_agent():
     package = request.json
@@ -19,6 +36,8 @@ def create_band():
     new_band = Band(
         name=package["name"],
         phone=package["phone"],
+        genre = package["genre"],
+        members = package["members"],
         signed=package["signed"]
     )
     db.session.add(new_band)
@@ -57,22 +76,7 @@ def create_band():
 #         )
 #     return jsonify(package)
 
-@app.route('/read/allBands', methods=['GET'])
-def read_bands():
-    all_bands = Band.query.all()
-    bands_dict = {"bands": []}
-    for band in all_bands:
-        bands_dict["bands"].append(
-            {
-                "id": band.id,
-                "name": band.name,
-                "phone": band.phone,
-                "genre": band.genre,
-                "members": band.members,
-                "signed": band.signed
-            }
-        )
-    return jsonify(bands_dict)
+
 
 # @app.route('/read/band/<int:id>', methods=['GET'])
 # def read_band(id):

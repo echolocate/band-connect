@@ -6,7 +6,7 @@ class BandForm(FlaskForm):
     name = StringField("Band Name", validators=[DataRequired()])
     phone = StringField("Phone", validators=[DataRequired()])
     genre = StringField("Genre", validators=[DataRequired()])
-    members = StringField("members", validators=[DataRequired])
+    members = StringField("members", validators=[DataRequired()])
     submit = SubmitField("Add Band")
 
 class AgentForm(FlaskForm):
