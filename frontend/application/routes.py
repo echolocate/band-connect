@@ -40,18 +40,6 @@ def create_band():
         app.logger.info(f"Response: {response.text}")
         return redirect(url_for('home'))
 
-@app.route('/create/agent', methods=['GET','POST'])
-def create_agent():
-    form = AgentForm()
-
-    if request.method == "POST":
-        response = requests.post(
-            f"http://{backend_host}/create/agent",
-            json={"name": form.name.data, "phone": form.phone.data}
-        )
-        app.logger.info(f"Response: {response.text}")
-        return redirect(url_for('home'))
-
 @app.route('/update/band/<int:id>', methods=['GET','POST'])
 def update_band(id):
     form = BandForm()

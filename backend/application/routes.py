@@ -13,14 +13,13 @@ def create_agent():
     db.session.commit()
     return f"Added agent: '{new_agent.name}' to database"
 
-@app.route('/create/band/<int:agent_id>', methods=['POST'])
+@app.route('/create/band', methods=['POST'])
 def create_band(agent_id):
     package = request.json
     new_band = Band(
         name=package["name"],
         phone=package["phone"],
-        signed=package["signed"],
-        agent_id = agent_id
+        signed=package["signed"]
     )
     db.session.add(new_band)
     db.session.commit()
@@ -69,11 +68,11 @@ def read_bands():
 @app.route('/read/band/<int:id>', methods=['GET'])
 def read_band(id):
     band = Band.query.get(id)
-    bands_dict = {(
+    bands_dict = {
         "id": band.id,
         "name": band.name,
         "phone": band.phone,
-        "signed": band.signed)
+        "signed": band.signed
         }
     return jsonify(bands_dict)
 
