@@ -14,7 +14,7 @@ def create_agent():
     return f"Added agent: '{new_agent.name}' to database"
 
 @app.route('/create/band', methods=['POST'])
-def create_band(agent_id):
+def create_band():
     package = request.json
     new_band = Band(
         name=package["name"],
