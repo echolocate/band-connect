@@ -17,15 +17,29 @@ def create_agent():
 def read_agents():
     all_agents = Agent.query.all()
     package = {"agents": []}
-    for agent in all_agents:        
+    for agent in all_agents:
+        bands = []
+        for band in agent.bands:
+            bands.append(
+                {
+                    "id": band.id,
+                    "name": band.name,
+                    "agent_id": band.agent_id,
+                    "phone": band.phone,
+                    "audience": band.genre,
+                    "members": band.members,
+                    "signed": signed.band
+                }
+            )
         package["agents"].append(
             {
                 "id": agent.id,
                 "name": agent.name,
-                "phone": agent.phone
+                "phone": agent.phone,
+                "bands": bands
             }
         )
-    return jsonify(package)
+    return jsonify()        
 
 @app.route('/update/agent/<int:id>', methods=['PUT'])
 def update_agent(id):
@@ -39,7 +53,7 @@ def update_agent(id):
 
 @app.route('/create/band', methods=['POST'])
 def create_band():
-    package = request.json
+    package= request.json
     new_band = Band(
         name=package["name"],
         phone=package["phone"],
@@ -66,7 +80,7 @@ def read_bands():
                 "signed": band.signed
             }
         )
-    return jsonify(package)
+    return jsonify()
 
 @app.route('/update/band/<int:id>', methods=['PUT'])
 def update_band(id):
@@ -109,23 +123,3 @@ def delete_agent(id):
 #                   "signed": band.signed
 #             }
 #     return jsonify(bands_dict)
-
-# @app.route('/read/agent/<int:id>', methods=['GET'])
-# def read_agent(id):
-#     agent = Agent.query.get(id)
-#     agents_dict = {
-#         "id": agent.id,
-#         "name": agent.name,
-#         "phone": agent.phone
-#         }
-#     return jsonify(agents_dict)
-
-
-
-
-# @app.route('/delete/band/<int:id>', methods=['DELETE'])
-# def delete_band(id):
-#     band = Band.query.get(id)
-#     db.session.delete(band)
-#     db.session.commit()
-#     return Response(f"Band with ID: {id} now signed", mimetype='text/plain')

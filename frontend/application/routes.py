@@ -20,20 +20,20 @@ def create_agent():
                 "phone": form.phone.data                
             }
         )
-        return redirect(url_for("home"))
+    return redirect(url_for("home"))
 
 @app.route('/create/band', methods=['GET', 'POST'])
 def create_band():
     form = CreateBandForm()
 
-    package = requests.get(f"http://bc-backend:5000/read/allBands").json()
-    for agent in package["agents"]:
-        form.agent.choices.append((agent["id"], agent["name"]))
+    package = requests.get(f"http://bc-backend:5000/read/allAgents").json()
+    for agents in package["agents"]:
+        form.agent.choices.append(agent["id"], agent["name"])
 
     if request.method == "POST":
         response = requests.post(
-            f"http://bc-backend:5000/create/moon/{form.agent.data}",
-            json={
+            f"http://bc-backend:5000/create/band/{form.agent.data}",
+            package={
                 "name": form.name.data,
                 "phone": form.phone.data
             }
