@@ -54,7 +54,7 @@ def create_band():
 @app.route('/read/allBands', methods=['GET'])
 def read_bands():
     all_bands = Band.query.all()
-    bands_dict = {"bands": []}
+    package = {"bands": []}
     for band in all_bands:
         bands_dict["bands"].append(
             {
@@ -66,7 +66,7 @@ def read_bands():
                 "signed": band.signed
             }
         )
-    return jsonify(bands_dict)
+    return jsonify(package)
 
 
 
