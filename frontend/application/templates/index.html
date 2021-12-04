@@ -1,51 +1,27 @@
 {% extends "layout.html" %}
 {% block body %}
-
-    <h2>Unsigned Bands</h2>
-    {% for band in all_bands %}
-    {% if band.signed == False %}
-        <p>
-            Band ID: {{ band["id"] }}<br>
-            Band Name: {{ band["name"] }}<br>
-            {#<!-- <a href="{{ url_for('update_task', id=task.id) }}">Edit</a>
-            <a href="{{ url_for('delete_task', id=task.id) }}">Delete</a>
-            <a href="{{ url_for('complete_task', id=task.id) }}">Complete</a> -->#}
-        </p>    
-    {% endif %}
-    {% endfor %}
-    
-    <h2>Signed Bands</h2>
-    {% for band in all_bands %}
-    {% if band.signed == True %}
-        <p>
-            Band ID: {{ band.id }}<br>
-            Band Name: {{ band.name }}<br>
-            {#<!-- <a href="{{ url_for('update_band', id=band.id) }}">Edit</a>
-            <a href="{{ url_for('delete_band', id=band.id) }}">Delete</a>
-            <a href="{{ url_for('unsigned_band', id=band.id) }}">Incomplete</a> -->#}
-        </p>    
-    {% endif %}
-    {% endfor %}
-
-{% endblock body %}
-
-
-{#<!-- {% extends "layout.html" %}
-{% block body %}
-    {% for band in bands %}
+    {% for agent in agents %}
     <table>
-        <h2>{{ band["name"] }}</h2>
+        <h2>{{ agent["name"] }}</h2>
         <tr>
-            <td><b>Phone</b></td>
-            <td>{{ band["phone"] }}</td>
-        </tr>
-        <tr>
-            <td><b>Genre</b></td>
-            <td>{{ band["genre"] }}</td>
-        </tr>
-        <tr>
-            <td><b>Number of members</b></td>
-            <td>{{ band["members"] }}</td>
+            <td><b>Phone Number</b></td>
+            <td>{{ agent["phone"] }}</td> 
         </tr>        
-    {% endfor %} 
-{% endblock body %}    -->#}
+    </table>
+    
+    <h3>Bands signed with {{ agent["name"] }}</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Audience</th>
+        </tr>
+        {% for band in agent["bands"] %}
+        <tr>
+            <td>{{ band["name"] }}</td> 
+            <td>{{ band["genre"] }}</td> 
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% endfor %}
+{% endblock body %}

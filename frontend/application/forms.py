@@ -20,6 +20,3 @@ class CreateBandForm(FlaskForm):
     )
     members = StringField("Members", validators=[DataRequired()])
     submit = SubmitField("Add Band")
-
-
-
