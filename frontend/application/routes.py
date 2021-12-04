@@ -4,12 +4,12 @@ from flask import render_template, request, redirect, url_for, jsonify
 import requests
 from os import getenv
 
-backend = getenv("BACKEND_HOSTNAME")
+backend = "bc-backend:5000"
 
 @app.route('/', methods=['GET'])
 def home():
-    agents = requests.get(f"http://{backend}/read/allAgents").json()["agents"]
-    return render_template('index.html', title="Home", agents=agents)
+    agents = requests.get(f"http://{backend}/read/allBands").json()["bands"]
+    return render_template('index.html', title="Home", bands=bands)
 
 @app.route('/create/agent', methods=['GET','POST'])
 def create_agent():
