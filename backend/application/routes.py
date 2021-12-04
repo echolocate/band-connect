@@ -2,23 +2,6 @@ from application import app, db
 from application.models import Band, Agent
 from flask import request, jsonify
 
-@app.route('/read/allBands', methods=['GET'])
-def read_bands():
-    all_bands = Band.query.all()
-    bands_dict = {"bands": []}
-    for band in all_bands:
-        bands_dict["bands"].append(
-            {
-                "id": band.id,
-                "name": band.name,
-                "phone": band.phone,
-                "genre": band.genre,
-                "members": band.members,
-                "signed": band.signed
-            }
-        )
-    return jsonify(bands_dict)
-
 @app.route('/create/agent', methods=["POST"])
 def create_agent():
     package = request.json
@@ -29,6 +12,21 @@ def create_agent():
     db.session.add(new_agent)
     db.session.commit()
     return f"Added agent: '{new_agent.name}' to database"
+
+@app.route('/read/allAgents', methods=['GET'])
+def read_agents():
+    all_agents = Agent.query.all()
+    package = {"agents": []}
+    for agent in all_agents:        
+        package["agents"].append(
+            {
+                "id": agent.id,
+                "name": agent.name,
+                "phone": agent.phone,
+                "bands": bands
+            }
+        )
+    return jsonify(package)
 
 @app.route('/create/band', methods=['POST'])
 def create_band():
@@ -43,6 +41,26 @@ def create_band():
     db.session.add(new_band)
     db.session.commit()
     return f"Added band: '{new_band.name}'"
+
+@app.route('/read/allBands', methods=['GET'])
+def read_bands():
+    all_bands = Agent.query.all()
+    bands_dict = {"bands": []}
+    for band in all_bands:
+        bands_dict["bands"].append(
+            {
+                "id": band.id,
+                "name": band.name,
+                "agent_id": band.agent_id,
+                "phone": band.phone,
+                "genre": band.genre,
+                "members": band.members,
+                "signed": band.signed
+            }
+        )
+    return jsonify(bands_dict)
+
+
 
 @app.route('/delete/band/<int:id>', methods=['DELETE'])
 def delete_band(id):

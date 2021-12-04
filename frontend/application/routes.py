@@ -8,7 +8,7 @@ backend = "bc-backend:5000"
 
 @app.route('/', methods=['GET'])
 def home():
-    all_bands = requests.get(f"http://{backend}/read/allBands").json()["bands"]
+    agents = requests.get(f"http://{backend}/read/allAgents").json()["agentss"]
     return render_template('index.html', title="Home", all_bands=all_bands)
 
 # @app.route('/create/agent', methods=['GET','POST'])
