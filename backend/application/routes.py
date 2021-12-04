@@ -23,7 +23,6 @@ def read_agents():
                 "id": agent.id,
                 "name": agent.name,
                 "phone": agent.phone,
-                "bands": bands
             }
         )
     return jsonify(package)
