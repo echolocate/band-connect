@@ -1,5 +1,37 @@
 {% extends "layout.html" %}
 {% block body %}
+
+    <h2>Unsigned Bands</h2>
+    {% for band in all_bands %}
+    {% if band.signed == False %}
+        <p>
+            Band ID: {{ task["id"] }}<br>
+            Band Name: {{ band["name"] }}<br>
+            {#<!-- <a href="{{ url_for('update_task', id=task.id) }}">Edit</a>
+            <a href="{{ url_for('delete_task', id=task.id) }}">Delete</a>
+            <a href="{{ url_for('complete_task', id=task.id) }}">Complete</a> -->#}
+        </p>    
+    {% endif %}
+    {% endfor %}
+    
+    <h2>Signed Bands</h2>
+    {% for band in all_bands %}
+    {% if band.signed == True %}
+        <p>
+            Band ID: {{ band.id }}<br>
+            Band Name: {{ band.name }}<br>
+            {#<!-- <a href="{{ url_for('update_band', id=band.id) }}">Edit</a>
+            <a href="{{ url_for('delete_band', id=band.id) }}">Delete</a>
+            <a href="{{ url_for('unsigned_band', id=band.id) }}">Incomplete</a> -->#}
+        </p>    
+    {% endif %}
+    {% endfor %}
+
+{% endblock body %}
+
+
+{#<!-- {% extends "layout.html" %}
+{% block body %}
     {% for band in bands %}
     <table>
         <h2>{{ band["name"] }}</h2>
@@ -16,4 +48,4 @@
             <td>{{ band["members"] }}</td>
         </tr>        
     {% endfor %} 
-{% endblock body %}   
+{% endblock body %}    -->#}

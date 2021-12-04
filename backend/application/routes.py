@@ -66,29 +66,29 @@ def delete_agent(id):
 #     db.session.commit()
 #     return Response(f"Band with ID: {id} signed", mimetype='text/plain')
 
-# @app.route('/read/allAgents', methods=['GET'])
-# def read_agents():
-#     all_agents = Agent.query.all()
-#     package = {"agents": []}
-#     for agent in all_agents:
-#         for band in agent.bands:
-#             bands.append(
-#                 {
-#                     "id": band.id,
-#                     "name": band.name,
-#                     "agent_id": band.agent_id,
-#                     "phone": band.phone
-#                 }
-#             )
-#         package["agents"].append(
-#             {
-#                 "id": agent.id,
-#                 "name": agent.name,
-#                 "phone": agent.phone,
-#                 "bands": bands
-#             }
-#         )
-#     return jsonify(package)
+@app.route('/read/allAgents', methods=['GET'])
+def read_agents():
+    all_agents = Agent.query.all()
+    package = {"agents": []}
+    for agent in all_agents:
+        for band in agent.bands:
+            bands.append(
+                {
+                    "id": band.id,
+                    "name": band.name,
+                    "agent_id": band.agent_id,
+                    "phone": band.phone
+                }
+            )
+        package["agents"].append(
+            {
+                "id": agent.id,
+                "name": agent.name,
+                "phone": agent.phone,
+                "bands": bands
+            }
+        )
+    return jsonify(package)
 
 
 
