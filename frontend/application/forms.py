@@ -2,7 +2,12 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired
 
-class BandForm(FlaskForm):
+class CreateAgentForm(FlaskForm):
+    name = StringField("Agent Name", validators=[DataRequired()])
+    phone = StringField("Phone", validators=[DataRequired()])
+    submit = SubmitField("Add Agent")
+
+class CreateBandForm(FlaskForm):
     name = StringField("Band Name", validators=[DataRequired()])
     phone = StringField("Phone", validators=[DataRequired()])
     genre = SelectField('Audience', validators=[DataRequired()],
@@ -16,8 +21,5 @@ class BandForm(FlaskForm):
     members = StringField("Members", validators=[DataRequired()])
     submit = SubmitField("Add Band")
 
-class AgentForm(FlaskForm):
-    name = StringField("Agent Name", validators=[DataRequired()])
-    phone = StringField("Phone", validators=[DataRequired()])
-    submit = SubmitField("Add Agent")
+
 

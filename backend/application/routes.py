@@ -11,7 +11,7 @@ def create_agent():
     )
     db.session.add(new_agent)
     db.session.commit()
-    return f"Added agent: '{new_agent.name}' to database"
+    return f"Added agent {new_agent.id}: '{new_agent.name}' to database"
 
 @app.route('/read/allAgents', methods=['GET'])
 def read_agents():
@@ -26,6 +26,16 @@ def read_agents():
             }
         )
     return jsonify(package)
+
+@app.route('/update/agent/<int:id>', methods=['PUT'])
+def update_agent(id):
+    package = request.json
+    agent = Agent.query.get(id)
+    agent.name = package["name"]
+    agent.phone = package["phone"]
+    db.session.commit()
+    return f"Updated agent (ID: {id}) with name: {agent.name}, phone number {agent.phone}"
+
 
 @app.route('/create/band', methods=['POST'])
 def create_band():
@@ -43,14 +53,13 @@ def create_band():
 
 @app.route('/read/allBands', methods=['GET'])
 def read_bands():
-    all_bands = Agent.query.all()
+    all_bands = Band.query.all()
     bands_dict = {"bands": []}
     for band in all_bands:
         bands_dict["bands"].append(
             {
                 "id": band.id,
                 "name": band.name,
-                "agent_id": band.agent_id,
                 "phone": band.phone,
                 "genre": band.genre,
                 "members": band.members,
@@ -104,14 +113,6 @@ def delete_agent(id):
 #         }
 #     return jsonify(agents_dict)
 
-# @app.route('/update/agent/<int:id>', methods=['PUT'])
-# def update_agent(id):
-#     package = request.json
-#     agent = Agent.query.get(id)
-#     agent.name = package["name"]
-#     agent.phone = package["phone"]
-#     db.session.commit()
-#     return f"Updated agent (ID: {id}) with name: {agent.name}, phone number {agent.phone}"
 
 # @app.route('/update/band/<int:id>', methods=['PUT'])
 # def update_band(id):
