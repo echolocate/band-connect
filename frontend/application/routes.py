@@ -1,29 +1,29 @@
 from application import app
-from application.forms import BandForm, AgentForm
+from application.forms import CreateBandForm, CreateAgentForm
 from flask import render_template, request, redirect, url_for, jsonify
 import requests
 from os import getenv
 
 @app.route('/', methods=['GET'])
 def home():
-    all_bands = requests.get(f"http://bc-backend:5000/read/allBands").json()["bands"]
-    return render_template('index.html', title="Home", all_bands=all_bands)
+    bands = requests.get("http://bc-backend:5000/read/allBands").json()["bands"]
+    return render_template('index.html', title="Home", bands=bands)
 
-# @app.route('/create/agent', methods=['GET','POST'])
-# def create_agent():
-#     form = AgentForm()
+@app.route('/create/agent', methods=['GET','POST'])
+def create_agent():
+    form = CreateAgentForm()
 
-#     if request.method == "POST":
-#         response = requests.post(
-#             f"http://{backend}/create/agent",
-#             json={
-#                 "name": form.name.data, 
-#                 "phone": form.phone.data
-#             }
-#         )        
-#         return redirect(url_for('home'))
+    if request.method == "POST":
+        response = requests.post(
+            f"http://{backend}/create/agent",
+            json={
+                "name": form.name.data, 
+                "phone": form.phone.data
+            }
+        )        
+        return redirect(url_for('home'))
 
-#     return render_template("create_agent.html", title="Add agent", form=form)
+    return render_template("create_agent.html", title="Add agent", form=form)
     
 
 # @app.route('/create/band', methods=['GET','POST'])

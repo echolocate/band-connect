@@ -56,7 +56,7 @@ def read_bands():
     all_bands = Band.query.all()
     package = {"bands": []}
     for band in all_bands:
-        bands_dict["bands"].append(
+        package["bands"].append(
             {
                 "id": band.id,
                 "name": band.name,
@@ -68,7 +68,14 @@ def read_bands():
         )
     return jsonify(package)
 
-
+@app.route('/update/band/<int:id>', methods=['PUT'])
+def update_band(id):
+    package = request.json
+    bands = Band.query.get(id)
+    bands.name = package["name"]
+    bands.phone = package["phone"]
+    db.session.commit()
+    return f"Updated bands (ID: {id}) with name: {bands.name}, phone number {bands.phone}"
 
 @app.route('/delete/band/<int:id>', methods=['DELETE'])
 def delete_band(id):
@@ -114,14 +121,7 @@ def delete_agent(id):
 #     return jsonify(agents_dict)
 
 
-# @app.route('/update/band/<int:id>', methods=['PUT'])
-# def update_band(id):
-#     package = request.json
-#     bands = Band.query.get(id)
-#     bands.name = package["name"]
-#     bands.phone = package["phone"]
-#     db.session.commit()
-#     return f"Updated bands (ID: {id}) with name: {bands.name}, phone number {bands.phone}"
+
 
 # @app.route('/delete/band/<int:id>', methods=['DELETE'])
 # def delete_band(id):
