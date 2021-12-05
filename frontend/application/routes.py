@@ -49,13 +49,25 @@ def create_band():
 @app.route('/read/allAgents', methods=['GET'])
 def read_agents():
     
-    agents = requests.get(f"http://{backend}/read/allAgents").json()["agents"]
+    agents = requests.get(f"http://bc-backend:5000/read/allAgents").json()["agents"]
     return render_template("read_agents.html", title="Agents", agents=agents)
 
 @app.route('/read/allBands', methods=['GET'])
 def read_bands():
     form = ViewBandsForm()
 
-    bands = requests.get(f"http://{backend}/read/allBands").json()["bands"]
+    bands = requests.get(f"http://bc-backend:5000/read/allBands").json()["bands"]
     return render_template("read_bands.html", title="Bands", bands=bands)
 
+# @app.route('/update/agent/<int:id>', methods=['GET','POST'])
+# def update_task(id):
+#     form = CreateAgentForm()
+#     agent = requests.get(f"http://bc-backend:5000/read/agent/{id}").json()
+#     app.logger.info(f"Task: {task}")
+
+#     if request.method == "POST":
+#         response = requests.put(
+#             f"http://bc-backend:5000/update/task/{id}",
+#             json={"description": form.description.data}
+#         )
+#         return redirect(url_for('home'))

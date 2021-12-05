@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+<p>
+    <b>Current name:</b> {{ agent.name }}
+    <b>Current phone:</b> {{ agent.phone }}
+</p>
+
+<div class='form'>
+    <form method='POST' action=''>
+        {{ form.hidden_tag() }}
+        {{ form.name.label }} {{ form.name }}<br>
+        {{ form.phone.label }} {{ form.phone }}<br>
+        {{ form.submit }}<br>
+    </form>
+</div>
+{% endblock %}
