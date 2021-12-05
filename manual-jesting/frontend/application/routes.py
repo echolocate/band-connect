@@ -1,6 +1,6 @@
 from application import app
 from application.forms import CreateBandForm, CreateAgentForm
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, jsonify
 import requests
 
 @app.route('/', methods=["GET"])
@@ -20,16 +20,14 @@ def create_agent():
                 "phone": form.phone.data                
             }
         )
-        return redirect(url_for("home"))
-
-    return render_template("create_agent.html", title="Add Agent", form=form)
+    return redirect(url_for("home"))
 
 @app.route('/create/band', methods=['GET', 'POST'])
 def create_band():
     form = CreateBandForm()
 
     json = requests.get(f"http://bc-backend:5000/read/allAgents").json()
-    for agent in json["agents"]:
+    for agents in json["agents"]:
         form.agent.choices.append(agent["id"], agent["name"])
 
     if request.method == "POST":

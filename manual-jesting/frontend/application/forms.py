@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired
 
 class CreateAgentForm(FlaskForm):
     name = StringField("Agent Name", validators=[DataRequired()])
-    phone = StringField("Phone", validators=[DataRequired()],choices=[])
+    phone = StringField("Phone", validators=[DataRequired()])
     submit = SubmitField("Add Agent")
 
 class CreateBandForm(FlaskForm):
@@ -18,5 +18,5 @@ class CreateBandForm(FlaskForm):
             ('Hardcore', 'Hardcore')
         ]
     )
-    members = StringField("Members", validators=[DataRequired()])    
+    members = StringField("Members", validators=[DataRequired()])
     submit = SubmitField("Add Band")
