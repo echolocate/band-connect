@@ -30,14 +30,16 @@ def create_band():
 
     json = requests.get(f"http://bc-backend:5000/read/allAgents").json()
     for agent in json["agents"]:
-        form.agent.choices.append(agent["id"])
+        form.agent.choices.append((agent["id"], agent["name"]))
 
     if request.method == "POST":
         response = requests.post(
             f"http://bc-backend:5000/create/band/{form.agent.data}",
             json={
                 "name": form.name.data,
-                "phone": form.phone.data
+                "phone": form.phone.data,
+                "genre": form.genre.data,
+                "members": form.members.data
             }
         )
         return redirect(url_for("home"))
