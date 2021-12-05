@@ -30,7 +30,7 @@ def create_band():
 
     json = requests.get(f"http://bc-backend:5000/read/allAgents").json()
     for agent in json["agents"]:
-        form.agent.choices.append(agent["id"], agent["name"])
+        form.agent.choices.append(agent["id"])
 
     if request.method == "POST":
         response = requests.post(
@@ -43,3 +43,17 @@ def create_band():
         return redirect(url_for("home"))
 
     return render_template("create_band.html", title="Add Band", form=form)
+
+@app.route('/read/allAgents', methods=['GET'])
+def read_agents():
+    
+    agents = requests.get(f"http://{backend}/read/allAgents").json()["agents"]
+    return render_template("read_agents.html", title="Agents", agents=agents)
+
+@app.route('/read/allBands', methods=['GET'])
+def read_bands():
+    form = ViewBandsForm()
+
+    bands = requests.get(f"http://{backend}/read/allBands").json()["bands"]
+    return render_template("read_bands.html", title="Bands", bands=bands)
+

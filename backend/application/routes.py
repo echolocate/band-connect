@@ -105,13 +105,11 @@ def delete_agent(id):
     db.session.commit()
     return f"Agent with ID: {id} now deleted"
 
-# @app.route('/sign/band/<int:agent_id>/<int:band_id>', methods=['PUT'])
-# def sign_band(agent_id,band_id):
-#     band = Band.query.get(band_id)
-#     agent = Agent.query.get(agent_id)
-#     band.signed = True
-#     db.session.commit()
-#     return Response(f"Band with ID: {id} signed", mimetype='text/plain')
+@app.route('/sign/band/<int:agent_id>', methods=['PUT'])
+def sign_band(agent_id):
+    bands = Band.query.put(agent_id)
+    db.session.commit()
+    return f"Agent {agent_id} signed: {bands.name}"
 
 # @app.route('/read/band/<int:id>', methods=['GET'])
 # def read_band(id):

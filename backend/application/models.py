@@ -2,7 +2,7 @@ from application import db
 
 class Agent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(50), nullable=False, default="Unsigned")
     phone = db.Column(db.String(20), nullable=False)
     bands = db.relationship('Band', backref='agent')
     
