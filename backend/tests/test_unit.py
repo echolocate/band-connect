@@ -6,8 +6,7 @@ from application.models import Agent, Band
 test_band={
     "id": 1,
     "name": "The Rutles",
-    "phone": "123456789",
-    "signed": False
+    "phone": "123456789"
     }
         
 test_agent={
@@ -94,6 +93,5 @@ class TestDelete(TestBase):
 
     def test_delete_band(self):
         response = self.client.delete(url_for('delete_band', id=1)),
-        self.assertEquals(b"Band with ID: 1 now signed", response.data)
+        self.assertEquals(b"Band with ID: 1 now deleted", response.data)
         self.assertIsNone(Band.query.get(1))
-

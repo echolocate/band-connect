@@ -10,15 +10,10 @@
     </table>
     
     <h3>Bands signed with {{ agent["name"] }}</h3>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Audience</th>
-        </tr>
+    <table>        
         {% for band in agent["bands"] %}
         <tr>
-            <td>{{ band["name"] }}</td> 
-            <td>{{ band["genre"] }}</td> 
+            <td>{{ band["name"] }}</td>
         </tr>
         {% endfor %}
     </table>
