@@ -30,7 +30,7 @@ def create_band():
 
     json = requests.get(f"http://bc-backend:5000/read/allAgents").json()
     for agent in json["agents"]:
-        form.agent.choices.append(agent["id"], agent["name"])
+        form.agent.choices.append(agent["id"])
 
     if request.method == "POST":
         response = requests.post(
