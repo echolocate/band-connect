@@ -39,7 +39,7 @@ def read_agents():
                 "bands": bands
             }
         )
-    return jsonify(json)        
+    return jsonify()        
 
 @app.route('/update/agent/<int:id>', methods=['PUT'])
 def update_agent(id):
@@ -67,7 +67,7 @@ def create_band():
 
 @app.route('/read/allBands', methods=['GET'])
 def read_bands():
-    all_bands = Agent.query.all()
+    all_bands = Band.query.all()
     json = {"bands": []}
     for band in all_bands:
         json["bands"].append(
