@@ -65,7 +65,7 @@ https://1drv.ms/u/s!Aq2hJel0GwxW5xRUbdt3FoMUdIfG
 ## Testing
 Using a bash shell script, Jenkins was used to coordinate the pretest (using pytest in a virtual environment),  in building of the front end and backend containers, pulling the source from GitHub via a webhook trigger, 
 Unfortunately, my Jenkins installment on the Dev-Jenkins vm locked me out on the penultimate day (the logs in the Jenkins folder suggest it happened around the time of an automatic update, but I cant be sure. Around this time I was messing around with projects on GitHub, so who knows). 
-I managed to install it on my Deployment vm in order to show evidence of the test stage with Cobertura and pytest, but not so far as to trigger the tests (or even pull the source from GitHub. Too late to get it going on that server properly anyhow.
+I managed to install it on my Deployment vm in order to show evidence of the test stage with Cobertura and pytest, but not so far as to trigger the tests (or even pull the source from GitHub. https://github.com/echolocate/band-connect-deployment-server  Too late to get it going on that server properly anyhow.
 This is a video I recorded of Jenkins going through all stages two days before it locked me out (hence no logs, I tried to do them manually in a virtual environment late in the day with pytest, no luck, no time... automation can make you take things for granted sometimes):
 Link to video of Jenkins doing its thing: https://1drv.ms/u/s!Aq2hJel0GwxW5yTD0ymjwWCScl3o?e=dwOR6G
 ## (sort of) Running app.
